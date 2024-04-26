@@ -1,8 +1,6 @@
-[submodule "thirdparty/eigen3/eigen3"]
-	path = thirdparty/eigen3/eigen3
+[submodule "thirdparty/eigen3/eigen"]
+	path = thirdparty/eigen3/eigen
 	url = https://gitlab.com/libeigen/eigen.git
-	branch = 3.4
-    
-[submodule "thridparty/matplotlib-cpp/matplotlib-cpp"]
-	path = thridparty/matplotlib-cpp/matplotlib-cpp
+[submodule "thirdparty/matplotlib-cpp/matplotlib-cpp"]
+	path = thirdparty/matplotlib-cpp/matplotlib-cpp
 	url = https://github.com/lava/matplotlib-cpp.git
