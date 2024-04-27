@@ -17,6 +17,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/find_eigen.cmake)
 
 set(${LIBRARY_NAME}_SOURCE_FILES
   src/icp.cpp
+  src/utils.cpp
 )
 add_library(${LIBRARY_NAME}
   ${${LIBRARY_NAME}_SOURCE_FILES}
