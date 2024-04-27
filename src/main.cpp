@@ -1,6 +1,7 @@
 #include <iostream>
+#include "icp/icp.hpp"
 
 int32_t main() {
-    std::cout << "hello world!!" << std::endl;
+    ICP icp;
     return 0;
 }

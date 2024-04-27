@@ -9,4 +9,15 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(${PACKAGE_NAME}_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+set(${PACKAGE_NAME}_MODULE_PATH "${${PACKAGE_NAME}_PATH}/module")
+set(${PACKAGE_NAME}_THIRDPARTY_PATH "${${PACKAGE_NAME}_PATH}/thirdparty")
+
+add_subdirectory(${${PACKAGE_NAME}_MODULE_PATH})
+add_subdirectory(${${PACKAGE_NAME}_THIRDPARTY_PATH})
+
 add_executable(MAIN src/main.cpp)
+
+target_link_libraries(MAIN PRIVATE
+    ICP
+)
