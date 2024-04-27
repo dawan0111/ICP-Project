@@ -13,6 +13,8 @@ set(${LIBRARY_NAME}_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 set(${LIBRARY_NAME}_SOURCE_PATH "${${LIBRARY_NAME}_PATH}/src")
 set(${LIBRARY_NAME}_INCLUDE_PATH "${${LIBRARY_NAME}_PATH}/include")
 
+include(${CMAKE_SOURCE_DIR}/cmake/find_eigen.cmake)
+
 set(${LIBRARY_NAME}_SOURCE_FILES
   src/icp.cpp
 )
@@ -21,6 +23,10 @@ add_library(${LIBRARY_NAME}
 )
 target_include_directories(${LIBRARY_NAME} PUBLIC
   ${${LIBRARY_NAME}_INCLUDE_PATH}
+  ${EIGEN3_INCLUDE_DIRS}
+)
+target_link_libraries(${LIBRARY_NAME} PRIVATE
+    ${EIGEN3_LIBS}
 )
 
 target_compile_options(${LIBRARY_NAME} PRIVATE
