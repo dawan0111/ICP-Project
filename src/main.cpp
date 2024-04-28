@@ -17,33 +17,31 @@ int32_t main() {
   icp.setInputSource(sourcePointsPtr);
   icp.setInputTarget(targetPointsPtr);
 
-  std::cout << "T: " << T << std::endl;
-
-  for (int i = 0; i < 100; ++i) {
-    icp.align();
-  }
-
-  std::vector<double> x, y;
   std::vector<double> x1, y1;
-
-  for (const auto &point : *sourcePointsPtr) {
-    x.push_back(point[0]);
-    y.push_back(point[1]);
-  }
-
   for (const auto &point : targetPoints) {
     x1.push_back(point[0]);
     y1.push_back(point[1]);
   }
 
-  // 그래프 설정
-  plt::figure_size(800, 600); // 그래프 크기 설정
-  plt::plot(x, y, "ro-");     // 빨간색 원 포인트와 선으로 연결
-  plt::plot(x1, y1, "bo-");   // 빨간색 원 포인트와 선으로 연결
-  plt::title("Plot of Vector<Eigen::Vector2d>");
+  plt::figure_size(800, 600);
   plt::xlabel("x axis");
   plt::ylabel("y axis");
-  plt::show(); // 그래프 보여주기
+
+  for (int i = 0; i < 10; ++i) {
+    icp.SVDAlign();
+    std::vector<double> x, y;
+    for (const auto &point : *sourcePointsPtr) {
+      x.push_back(point[0]);
+      y.push_back(point[1]);
+    }
+    plt::clf();
+    plt::plot(x1, y1, "bo-");
+    plt::title("Iteration #" + std::to_string(i + 1));
+    plt::plot(x, y, "ro-");
+    plt::pause(0.5);
+  }
+
+  plt::show();
 
   return 0;
 }

@@ -17,11 +17,8 @@ void ICP::setInputTarget(InputPointsPtr target) {
   setCenterPoint(target_);
 }
 
-void ICP::align() {
+void ICP::SVDAlign() {
   setCenterPoint(source_);
-  // assert(source_.centeredPoints.size() <= 0 && "source point length is
-  // zero"); assert(target_.centeredPoints.size() <= 0 && "target point length
-  // is zero");
 
   auto corrs =
       getCorrespondenceIndices(source_.centeredPoints, target_.centeredPoints);

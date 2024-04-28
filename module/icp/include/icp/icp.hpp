@@ -20,7 +20,7 @@ public:
   ICP();
   void setInputSource(const InputPointsPtr points);
   void setInputTarget(const InputPointsPtr points);
-  void align();
+  void SVDAlign();
 
 private:
   PointsStruct inputSource_;
