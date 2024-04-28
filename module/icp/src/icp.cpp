@@ -18,14 +18,10 @@ void ICP::setInputTarget(InputPointsPtr target) {
 }
 
 void ICP::align() {
-  std::cout << "align" << std::endl;
   setCenterPoint(source_);
   // assert(source_.centeredPoints.size() <= 0 && "source point length is
   // zero"); assert(target_.centeredPoints.size() <= 0 && "target point length
   // is zero");
-
-  std::cout << "norm: " << (source_.center - target_.center).norm()
-            << std::endl;
 
   auto corrs =
       getCorrespondenceIndices(source_.centeredPoints, target_.centeredPoints);
@@ -54,14 +50,12 @@ ICP::getCorrespondenceIndices(const Points &sourcePoints,
     int32_t index = -1;
     double minDist = MAXFLOAT;
     for (int32_t j = 0; j < targetLength; ++j) {
-      auto vec = targetPoints[j] - sourcePoints[i];
-      auto dist = vec.norm();
+      auto dist = (targetPoints[j] - sourcePoints[i]).norm();
       if (dist < minDist) {
         minDist = dist;
         index = j;
       }
     }
-
     corr.emplace_back(i, index);
   }
   return corr;

@@ -8,8 +8,9 @@ Points generateRandomPoints(const int16_t length, const double min,
 
   randomPoints.reserve(length);
 
-  for (int16_t i = 0; i < length; i++) {
-    randomPoints.emplace_back(xyDist(rng1), xyDist(rng1));
+  for (int16_t i = 0; i < length; ++i) {
+    randomPoints.emplace_back(
+        i, sin(2 * M_PI * static_cast<double>(i) / length) * length);
   }
 
   return randomPoints;
@@ -21,7 +22,7 @@ Eigen::Matrix3d transformPoints(const Points &source, Points &target,
   std::uniform_real_distribution angleDist(minAngle, maxAngle);
   std::uniform_real_distribution tranDist(minTransition, maxTransition);
 
-  double angle = M_PI / angleDist(rng1);
+  double angle = angleDist(rng1) * M_PI / 180;
   double tranX = tranDist(rng1);
   double tranY = tranDist(rng1);
 

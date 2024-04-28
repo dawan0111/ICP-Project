@@ -16,8 +16,11 @@ set(${PACKAGE_NAME}_THIRDPARTY_PATH "${${PACKAGE_NAME}_PATH}/thirdparty")
 add_subdirectory(${${PACKAGE_NAME}_MODULE_PATH})
 add_subdirectory(${${PACKAGE_NAME}_THIRDPARTY_PATH})
 
+include(${CMAKE_SOURCE_DIR}/cmake/find_matplotlib.cmake)
+
 add_executable(MAIN src/main.cpp)
 
 target_link_libraries(MAIN PRIVATE
     ICP
+    matplotlib_cpp::matplotlib_cpp
 )

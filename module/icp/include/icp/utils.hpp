@@ -1,6 +1,6 @@
 #ifndef ICP_UTILS_HPP_
 #define ICP_UTILS_HPP_
-#define RANDOM_SEED 3244
+#define RANDOM_SEED 1500
 #include "icp.hpp"
 #include <Eigen/Core>
 #include <cmath>
@@ -9,8 +9,8 @@
 
 namespace ICP::utils {
 static std::mt19937_64 rng1(RANDOM_SEED);
-Points generateRandomPoints(int16_t length, const double min = 1.0,
-                            const double max = 4.0);
+Points generateRandomPoints(int16_t length, const double min = 20.0,
+                            const double max = 80.0);
 Eigen::Matrix3d transformPoints(const Points &source, Points &target,
                                 const double minAngle = 20.0,
                                 const double maxAngle = 60.0,
