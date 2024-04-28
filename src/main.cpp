@@ -4,14 +4,20 @@
 
 int32_t main() {
   ICP::ICP icp;
-  ICP::ICP::Points targetPoints;
-  auto randomPoints = ICP::utils::generateRandomPoints(10);
-  auto T = ICP::utils::transformPoints(randomPoints, targetPoints);
+  ICP::Points sourcePoints;
+  auto targetPoints = ICP::utils::generateRandomPoints(20);
+  auto T = ICP::utils::transformPoints(targetPoints, sourcePoints);
 
-  for (int i = 0; i < randomPoints.size(); ++i) {
-    std::cout << "=====" << i << "=====" << std::endl;
-    std::cout << "SourcePoint: " << randomPoints[i] << std::endl;
-    std::cout << "TransformPoint: " << targetPoints[i] << std::endl;
-  }
+  auto sourcePointsPtr = std::make_shared<ICP::Points>(sourcePoints);
+  auto targetPointsPtr = std::make_shared<ICP::Points>(targetPoints);
+
+  icp.setInputSource(sourcePointsPtr);
+  icp.setInputTarget(targetPointsPtr);
+
+  std::cout << "T: " << T << std::endl;
+
+  icp.align();
+  icp.align();
+  icp.align();
   return 0;
 }

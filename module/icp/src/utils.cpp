@@ -1,10 +1,10 @@
 #include "icp/utils.hpp"
 
 namespace ICP::utils {
-ICP::Points generateRandomPoints(const int16_t length, const double min,
-                                 const double max) {
+Points generateRandomPoints(const int16_t length, const double min,
+                            const double max) {
   std::uniform_real_distribution xyDist(min, max);
-  ICP::Points randomPoints;
+  Points randomPoints;
 
   randomPoints.reserve(length);
 
@@ -14,7 +14,7 @@ ICP::Points generateRandomPoints(const int16_t length, const double min,
 
   return randomPoints;
 }
-Eigen::Matrix3d transformPoints(const ICP::Points &source, ICP::Points &target,
+Eigen::Matrix3d transformPoints(const Points &source, Points &target,
                                 const double minAngle, const double maxAngle,
                                 const double minTransition,
                                 double maxTransition) {

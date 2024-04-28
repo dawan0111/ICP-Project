@@ -9,13 +9,13 @@
 
 namespace ICP::utils {
 static std::mt19937_64 rng1(RANDOM_SEED);
-ICP::Points generateRandomPoints(int16_t length, const double min = 1.0,
-                                 const double max = 4.0);
-Eigen::Matrix3d transformPoints(const ICP::Points &source, ICP::Points &target,
-                                const double minAngle = 10.0,
-                                const double maxAngle = 40.0,
-                                const double minTransition = 1.0,
-                                double maxTransition = 4.0);
+Points generateRandomPoints(int16_t length, const double min = 1.0,
+                            const double max = 4.0);
+Eigen::Matrix3d transformPoints(const Points &source, Points &target,
+                                const double minAngle = 20.0,
+                                const double maxAngle = 60.0,
+                                const double minTransition = 4.0,
+                                double maxTransition = 10.0);
 } // namespace ICP::utils
 
 #endif
