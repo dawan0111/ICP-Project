@@ -1,5 +1,5 @@
 # C++ ICP Algorithm Project
-[![icp.gif](https://i.postimg.cc/gc6gmM9F/icp.gif)](https://postimg.cc/ThfVcJYC)
+[![icp2-ezgif-com-crop.gif](https://i.postimg.cc/8CdVKhGx/icp2-ezgif-com-crop.gif)](https://postimg.cc/McG4XfvY)
 
 This project aims to visualize Iterative Closest Point (ICP) algorithms implemented in C++. Eigen3 and matplotlib-cpp libraries are used, and three ICP variants are planned to be implemented, showcased with checkbox-like indicators:
 
