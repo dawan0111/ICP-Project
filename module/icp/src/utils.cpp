@@ -10,7 +10,8 @@ Points generateRandomPoints(const int16_t length, const double min,
 
   for (int16_t i = 0; i < length; ++i) {
     randomPoints.emplace_back(
-        i, sin(2 * M_PI * static_cast<double>(i) / length) * length);
+        i, sin(2 * M_PI * static_cast<double>(i) / length) * length +
+               xyDist(rng1));
   }
 
   return randomPoints;

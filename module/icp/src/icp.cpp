@@ -5,7 +5,6 @@ ICP::ICP() { std::cout << "ICP Method!!" << std::endl; }
 
 void ICP::setInputSource(InputPointsPtr source) {
   inputSource_.points = std::make_shared<Points>(*source);
-  // source_.centeredPoints.reserve(source->size());
 
   source_.points = source;
   source_.centeredPoints.reserve(source->size());

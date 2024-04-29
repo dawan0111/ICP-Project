@@ -18,9 +18,9 @@ add_subdirectory(${${PACKAGE_NAME}_THIRDPARTY_PATH})
 
 include(${CMAKE_SOURCE_DIR}/cmake/find_matplotlib.cmake)
 
-add_executable(MAIN src/main.cpp)
+add_executable(SVD_EXAMPLE src/svd_example.cpp)
 
-target_link_libraries(MAIN PRIVATE
+target_link_libraries(SVD_EXAMPLE PRIVATE
     ICP
     matplotlib_cpp::matplotlib_cpp
 )

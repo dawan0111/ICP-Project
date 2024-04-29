@@ -9,8 +9,8 @@
 
 namespace ICP::utils {
 static std::mt19937_64 rng1(RANDOM_SEED);
-Points generateRandomPoints(int16_t length, const double min = 20.0,
-                            const double max = 80.0);
+Points generateRandomPoints(int16_t length, const double min = -3.0,
+                            const double max = 3.0);
 Eigen::Matrix3d transformPoints(const Points &source, Points &target,
                                 const double minAngle = 20.0,
                                 const double maxAngle = 60.0,
