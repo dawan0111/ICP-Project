@@ -36,7 +36,7 @@ int32_t main() {
     }
     plt::clf();
     plt::plot(x1, y1, "bo-");
-    plt::title("Iteration #" + std::to_string(i + 1));
+    plt::title("SVD Iteration #" + std::to_string(i + 1));
     plt::plot(x, y, "ro-");
     plt::pause(0.5);
   }
