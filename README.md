@@ -17,6 +17,7 @@ This project aims to visualize Iterative Closest Point (ICP) algorithms implemen
 
 2. Build the project.
     ```bash
+    sudo ./thirdparty_build.sh
     mkdir build
     cd build
     cmake ..

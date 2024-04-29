@@ -14,7 +14,6 @@ set(${PACKAGE_NAME}_MODULE_PATH "${${PACKAGE_NAME}_PATH}/module")
 set(${PACKAGE_NAME}_THIRDPARTY_PATH "${${PACKAGE_NAME}_PATH}/thirdparty")
 
 add_subdirectory(${${PACKAGE_NAME}_MODULE_PATH})
-add_subdirectory(${${PACKAGE_NAME}_THIRDPARTY_PATH})
 
 include(${CMAKE_SOURCE_DIR}/cmake/find_matplotlib.cmake)
 
