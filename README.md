@@ -4,7 +4,7 @@
 This project aims to visualize Iterative Closest Point (ICP) algorithms implemented in C++. Eigen3 and matplotlib-cpp libraries are used, and three ICP variants are planned to be implemented, showcased with checkbox-like indicators:
 
 - [x] SVD-based ICP
-- [ ] Non-linear least squares-based ICP
+- [x] Non-linear least squares-based ICP
 - [ ] Point-to-plane least squares-based ICP
 
 ## Installation and Usage
