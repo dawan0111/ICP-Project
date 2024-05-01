@@ -27,8 +27,7 @@ int32_t main() {
   plt::xlabel("x axis");
   plt::ylabel("y axis");
 
-  for (int i = 0; i < 10; ++i) {
-    icp.SVDAlign();
+  for (int i = 0; i < 11; ++i) {
     std::vector<double> x, y;
     for (const auto &point : *sourcePointsPtr) {
       x.push_back(point[0]);
@@ -36,9 +35,10 @@ int32_t main() {
     }
     plt::clf();
     plt::plot(x1, y1, "bo-");
-    plt::title("SVD Iteration #" + std::to_string(i + 1));
+    plt::title("SVD Iteration #" + std::to_string(i));
     plt::plot(x, y, "ro-");
     plt::pause(0.5);
+    icp.align();
   }
 
   plt::show();
