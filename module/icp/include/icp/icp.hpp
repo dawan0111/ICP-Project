@@ -13,19 +13,23 @@ struct PointsStruct {
   Eigen::Vector2d center;
   Points centeredPoints;
 };
+
+enum class Method { SVD, GAUSS_NEWTON };
 class ICP {
 public:
   using CorrespondenceIndices = std::vector<std::pair<int32_t, int32_t>>;
 
-  ICP();
+  ICP(Method method = Method::SVD);
   void setInputSource(const InputPointsPtr points);
   void setInputTarget(const InputPointsPtr points);
-  void SVDAlign();
+  void setUpdateMethod(Method method);
+  void align();
 
 private:
   PointsStruct inputSource_;
   PointsStruct source_;
   PointsStruct target_;
+  Method icpMethod_ = Method::SVD;
 
   CorrespondenceIndices getCorrespondenceIndices(const Points &sourcePoints,
                                                  const Points &targetPoints);
@@ -33,6 +37,8 @@ private:
                                       const Points &targetPoints,
                                       const CorrespondenceIndices &indices);
   void setCenterPoint(PointsStruct &pointsData);
+  void SVDAlign();
+  void GaussNewtonAlign();
 };
 } // namespace ICP
 #endif

@@ -1,7 +1,7 @@
 #include "icp/icp.hpp"
 
 namespace ICP {
-ICP::ICP() { std::cout << "ICP Method!!" << std::endl; }
+ICP::ICP(Method method) : icpMethod_(method) {}
 
 void ICP::setInputSource(InputPointsPtr source) {
   inputSource_.points = std::make_shared<Points>(*source);
@@ -14,6 +14,16 @@ void ICP::setInputTarget(InputPointsPtr target) {
   target_.points = target;
   target_.centeredPoints.reserve(target->size());
   setCenterPoint(target_);
+}
+
+void ICP::setUpdateMethod(Method method) { icpMethod_ = method; }
+
+void ICP::align() {
+  if (icpMethod_ == Method::SVD) {
+    SVDAlign();
+  } else if (icpMethod_ == Method::GAUSS_NEWTON) {
+    GaussNewtonAlign();
+  }
 }
 
 void ICP::SVDAlign() {
@@ -33,6 +43,10 @@ void ICP::SVDAlign() {
   for (auto &point : *source_.points) {
     point = R * point + t;
   }
+}
+
+void ICP::GaussNewtonAlign() {
+  std::cout << "currently not update!!" << std::endl;
 }
 
 ICP::CorrespondenceIndices
