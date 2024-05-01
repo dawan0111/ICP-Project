@@ -1,7 +1,7 @@
 #ifndef ICP_UTILS_HPP_
 #define ICP_UTILS_HPP_
 #define RANDOM_SEED 1500
-#include "icp.hpp"
+#include "icp/icp.hpp"
 #include <Eigen/Core>
 #include <cmath>
 #include <iostream>
@@ -16,6 +16,8 @@ Eigen::Matrix3d transformPoints(const Points &source, Points &target,
                                 const double maxAngle = 60.0,
                                 const double minTransition = 4.0,
                                 double maxTransition = 10.0);
+Eigen::Matrix2d getR(double theta);
+Eigen::Matrix2d getDR(double theta);
 } // namespace ICP::utils
 
 #endif

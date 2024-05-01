@@ -46,7 +46,40 @@ void ICP::SVDAlign() {
 }
 
 void ICP::GaussNewtonAlign() {
-  std::cout << "currently not update!!" << std::endl;
+  Eigen::Matrix3d H = Eigen::Matrix3d::Zero();
+  Eigen::Vector3d g = Eigen::Vector3d::Zero();
+  Eigen::Vector3d x = Eigen::Vector3d::Zero();
+  double chi = 0;
+
+  auto corrs = getCorrespondenceIndices(*source_.points, *target_.points);
+
+  auto R = getR(x(2));
+  auto dR = getDR(x(2));
+
+  for (auto &corr : corrs) {
+    auto sourceP = (*source_.points)[corr.first];
+    auto targetP = (*target_.points)[corr.second];
+    Eigen::Matrix<double, 2, 3> J;
+
+    /* clang-format off */
+    J.block(0, 0, 2, 2) = Eigen::Matrix2d::Identity();
+    J.block(0, 2, 2, 1) = dR * sourceP;
+    /* clang-format on */
+
+    Eigen::Vector2d error = (R * sourceP + x.segment(0, 2)) - targetP;
+    H += J.transpose() * J;
+    g += J.transpose() * error;
+    chi += error.transpose() * error;
+  }
+
+  auto dx = H.colPivHouseholderQr().solve(-g);
+  x += dx;
+  x(2) = atan2(sin(x(2)), cos(x(2)));
+  auto R_1 = getR(x(2));
+
+  for (auto &point : *source_.points) {
+    point = R_1 * point + x.segment(0, 2);
+  }
 }
 
 ICP::CorrespondenceIndices
@@ -97,5 +130,26 @@ Eigen::Matrix2d ICP::getCovarianceMatrix(const Points &sourcePoints,
     conv += target_p * source_p.transpose();
   }
   return conv;
+}
+Eigen::Matrix2d ICP::getR(double theta) {
+  Eigen::Matrix2d rotationMatrix;
+
+  /* clang-format off */
+  rotationMatrix << cos(theta), sin(theta) * -1.0,
+                    sin(theta), cos(theta);
+
+  /* clang-format on */
+  return rotationMatrix;
+}
+
+Eigen::Matrix2d ICP::getDR(double theta) {
+  Eigen::Matrix2d rotationDMatrix;
+
+  /* clang-format off */
+  rotationDMatrix << sin(theta) * -1.0, cos(theta) * -1.0,
+                    cos(theta), sin(theta) * -1.0;
+
+  /* clang-format on */
+  return rotationDMatrix;
 }
 } // namespace ICP

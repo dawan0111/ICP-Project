@@ -1,6 +1,8 @@
 #ifndef ICP_HPP_
 #define ICP_HPP_
+
 #include <Eigen/Dense>
+#include <Eigen/QR>
 #include <Eigen/SVD>
 #include <iostream>
 #include <memory>
@@ -31,11 +33,14 @@ private:
   PointsStruct target_;
   Method icpMethod_ = Method::SVD;
 
+private:
   CorrespondenceIndices getCorrespondenceIndices(const Points &sourcePoints,
                                                  const Points &targetPoints);
   Eigen::Matrix2d getCovarianceMatrix(const Points &sourcePoints,
                                       const Points &targetPoints,
                                       const CorrespondenceIndices &indices);
+  Eigen::Matrix2d getR(double theta);
+  Eigen::Matrix2d getDR(double theta);
   void setCenterPoint(PointsStruct &pointsData);
   void SVDAlign();
   void GaussNewtonAlign();

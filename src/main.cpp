@@ -6,9 +6,9 @@
 namespace plt = matplotlibcpp;
 
 int32_t main() {
-  ICP::ICP icp;
+  ICP::ICP icp(ICP::Method::GAUSS_NEWTON);
   ICP::Points sourcePoints;
-  auto targetPoints = ICP::utils::generateRandomPoints(20);
+  auto targetPoints = ICP::utils::generateRandomPoints(35);
   auto T = ICP::utils::transformPoints(targetPoints, sourcePoints);
 
   auto sourcePointsPtr = std::make_shared<ICP::Points>(sourcePoints);
@@ -27,7 +27,7 @@ int32_t main() {
   plt::xlabel("x axis");
   plt::ylabel("y axis");
 
-  for (int i = 0; i < 11; ++i) {
+  for (int i = 0; i < 16; ++i) {
     std::vector<double> x, y;
     for (const auto &point : *sourcePointsPtr) {
       x.push_back(point[0]);
@@ -35,7 +35,7 @@ int32_t main() {
     }
     plt::clf();
     plt::plot(x1, y1, "bo-");
-    plt::title("SVD Iteration #" + std::to_string(i));
+    plt::title("Iteration #" + std::to_string(i));
     plt::plot(x, y, "ro-");
     plt::pause(0.5);
     icp.align();
