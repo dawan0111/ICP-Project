@@ -26,7 +26,7 @@ This project aims to visualize Iterative Closest Point (ICP) algorithms implemen
 
 3. Run the executable to visualize the algorithm.
     ```bash
-    ./SVD_EXAMPLE
+    ./MAIN_EXAMPLE
     ```
 
 ## Notes
