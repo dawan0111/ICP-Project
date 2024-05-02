@@ -16,7 +16,7 @@ struct PointsStruct {
   Points centeredPoints;
 };
 
-enum class Method { SVD, GAUSS_NEWTON };
+enum class Method { SVD, GAUSS_NEWTON, POINT_TO_PLANE };
 class ICP {
 public:
   using CorrespondenceIndices = std::vector<std::pair<int32_t, int32_t>>;
@@ -44,6 +44,7 @@ private:
   void setCenterPoint(PointsStruct &pointsData);
   void SVDAlign();
   void GaussNewtonAlign();
+  void pointToPlaneAlign();
 };
 } // namespace ICP
 #endif

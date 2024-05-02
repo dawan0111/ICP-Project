@@ -23,6 +23,8 @@ void ICP::align() {
     SVDAlign();
   } else if (icpMethod_ == Method::GAUSS_NEWTON) {
     GaussNewtonAlign();
+  } else if (icpMethod_ == Method::POINT_TO_PLANE) {
+    pointToPlaneAlign();
   }
 }
 
@@ -80,6 +82,10 @@ void ICP::GaussNewtonAlign() {
   for (auto &point : *source_.points) {
     point = R_1 * point + x.segment(0, 2);
   }
+}
+
+void ICP::pointToPlaneAlign() {
+  std::cout << "Point To Plane Method" << std::endl;
 }
 
 ICP::CorrespondenceIndices
