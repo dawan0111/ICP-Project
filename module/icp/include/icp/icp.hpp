@@ -39,11 +39,12 @@ private:
   Eigen::Matrix2d getCovarianceMatrix(const Points &sourcePoints,
                                       const Points &targetPoints,
                                       const CorrespondenceIndices &indices);
+  Points getNormalVectors(const Points &points, int32_t stepSize = 1);
   Eigen::Matrix2d getR(double theta);
   Eigen::Matrix2d getDR(double theta);
   void setCenterPoint(PointsStruct &pointsData);
   void SVDAlign();
-  void GaussNewtonAlign();
+  void gaussNewtonAlign();
   void pointToPlaneAlign();
 };
 } // namespace ICP

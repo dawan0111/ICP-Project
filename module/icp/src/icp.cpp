@@ -22,7 +22,7 @@ void ICP::align() {
   if (icpMethod_ == Method::SVD) {
     SVDAlign();
   } else if (icpMethod_ == Method::GAUSS_NEWTON) {
-    GaussNewtonAlign();
+    gaussNewtonAlign();
   } else if (icpMethod_ == Method::POINT_TO_PLANE) {
     pointToPlaneAlign();
   }
@@ -47,7 +47,7 @@ void ICP::SVDAlign() {
   }
 }
 
-void ICP::GaussNewtonAlign() {
+void ICP::gaussNewtonAlign() {
   Eigen::Matrix3d H = Eigen::Matrix3d::Zero();
   Eigen::Vector3d g = Eigen::Vector3d::Zero();
   Eigen::Vector3d x = Eigen::Vector3d::Zero();
@@ -137,6 +137,24 @@ Eigen::Matrix2d ICP::getCovarianceMatrix(const Points &sourcePoints,
   }
   return conv;
 }
+
+Points ICP::getNormalVectors(const Points &points, int32_t stepSize) {
+  Points normalVectors;
+  normalVectors.emplace_back(0.0, 0.0);
+  int32_t length = points.size();
+
+  for (int i = stepSize; i < length - stepSize; i += stepSize) {
+    Eigen::Vector2d prevPoint = points[i - stepSize];
+    Eigen::Vector2d nextPoint = points[i + stepSize];
+
+    auto diff = prevPoint - nextPoint;
+    normalVectors.emplace_back(diff(1) * -1.0, diff(0));
+  }
+
+  normalVectors.emplace_back(0.0, 0.0);
+  return normalVectors;
+}
+
 Eigen::Matrix2d ICP::getR(double theta) {
   Eigen::Matrix2d rotationMatrix;
 
