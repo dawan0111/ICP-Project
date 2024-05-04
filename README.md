@@ -5,7 +5,6 @@ This project aims to visualize Iterative Closest Point (ICP) algorithms implemen
 
 - [x] SVD-based ICP
 - [x] Non-linear least squares-based ICP
-- [ ] Point-to-plane least squares-based ICP
 
 ## Installation and Usage
 
